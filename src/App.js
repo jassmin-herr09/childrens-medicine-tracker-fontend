@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
-function App() {
+export default function App() {
+  const [state, setState] = useState({
+    medicines: [{ medicine: "Tylenol", level: 4 }]
+  });
+
+  function addMedicine() {
+    alert("ADD SKILL CLICKED");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section>
+      <h2>WelliKids Medicine Tracker</h2>
+      <hr />
+      {state.medicines.map((s, i) => (
+        <article key={i}>
+          <div>{s.medicine}</div> <div>{s.level}</div>
+        </article>
+      ))}
+      <hr />
+      <form>
+        <label>
+          <span>Name</span>
+          <input name="medicine" />
+        </label>
+        <label>
+          <span>Quantity:</span>
+          <select name="level">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <button>Add Medicine</button>
+      </form>
+    </section>
   );
 }
-
-export default App;
