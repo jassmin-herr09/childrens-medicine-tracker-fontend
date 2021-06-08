@@ -4,20 +4,20 @@ import "./App.css";
 
 export default function App() {
   const [state, setState] = useState({
-    skills: [{ skill: "Tylenol", level: 4 }],
-    newSkill: {
-     skill: "",
-     level: "3"
+      medicines: [{medicine: "Tylenol", level: '4ml'}],
+      newMedicine: {  
+        medicine: "",
+        level: "3"
     }
   });
 
   useEffect(function() {
     function getAppData () {
-    fetch('http://localhost:3001/api/skills')
+    fetch('http://localhost:3001/api/medicines')
     .then(response => response.json())
     .then(data => setState(prevState =>({
       ...prevState,
-      skills: data
+      medicines: data
       
     })));
     }
@@ -25,15 +25,13 @@ export default function App() {
    getAppData()
 
   }, []);
-
-  function addSkill(e) {
+    function addMedicine(e) {
     e.preventDefault();
-   // alert("ADD SKILL CLICKED");
    setState({
-     skills: [...state.skills, state.newSkill],
-     newSkill: {
-       skill: "",
-       level: "3"
+       medicines: [...state.medicines, state.newMedicine],
+       newMedicine: {
+         medicine: "", 
+          level: "3"
      }
    });
 
@@ -41,10 +39,9 @@ export default function App() {
 
   function handleChange(e) {
     setState(prevState => ({
-        skills: prevState.skills,
-        //...prevState, //function, method overloading
-        newSkill: {
-          ...prevState.newSkill,
+         medicines: prevState.medicines,
+          newMedicine: {
+            ...prevState.newMedicine,
            [e.target.name]: e.target.value
 
        }
@@ -55,20 +52,21 @@ export default function App() {
     <section>
       <h2>Kids Medicine Tracker</h2>
       <hr />
-      {state.skills.map((s, i) => (
+      {state.medicines.map((s, i) => (
         <article key={i}>
-          <div>{s.skill}</div> <div>{s.level}</div>
+          <div>{s.medicine}</div> <div>{s.level}</div>
+          
         </article>
       ))}
       <hr />
-      <form onSubmit={addSkill}>
+      <form onSubmit={addMedicine}>
         <label>
           <span>Name</span>
         </label>
-          <input name="skill" value={state.newSkill.skill} onChange={handleChange}/>
+          <input name="medicine" value={state.newMedicine.medicine} onChange={handleChange}/>
         <label>
           <span>Quantity:</span>
-          <select name="level" value={state.newSkill.level} onChange={handleChange}>
+          <select name="level" value={state.newMedicine.level} onChange={handleChange}>
             <option value="1ml">1ml</option>
             <option value="2ml">2ml</option>
             <option value="3ml">3ml</option>
