@@ -34,6 +34,18 @@ article > div:nth-child(2) {
   width: 4rem;
   background-color: #e57373;
   text-align: center;
+
+}
+
+article > div:nth-child(1) {
+  flex-grow: 1;
+
+}
+
+.controls {
+ cursor: pointer;
+ background-color: darkred;
+
 }
   
 label {
