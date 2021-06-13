@@ -2,26 +2,30 @@
   box-sizing: border-box;
 }
   
-body {
+#root {
   font-family: 'Montserrat';
-  height: 100vh;
-  display: grid;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   justify-items: center;
   align-items: center;
 }
-  
-h2 {
-  color: #6a1b9a;
-  margin: 0;
-  text-align: center;
+
+section {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
 }
   
 section > article {
   display: flex;
   justify-content: space-between;
-  min-width: 25rem;
+  min-width: 17.25rem;
   color: white;
-  margin: 0.1rem;
+  margin: 0.2rem;
   background-color: #d32f2f;
 }
   
