@@ -1,14 +1,25 @@
 
 import { useState, useEffect } from "react";
 import "./App.css";
+import Header from './components/Header/Header';
+
+//import 'react-datepicker/dist/react-datepicker.css'
+//import MyComponent from "./MyComponent";
+
+//import moment from 'moment'
+
+
 
 export default function App() {
   const [state, setState] = useState({
       medicines: [{medicine: "Tylenol", level: 4 }],
       newMedicine: {  
         medicine: "",
-        level: "3"
+        level: "1ml",
+        date: ''
     },
+ 
+
     editMode: false
   });
 
@@ -46,15 +57,15 @@ export default function App() {
 
         }).then(res => res.json());
 
-      setState(prevState => ({
-       ...prevState,
+      setState({
        medicines,
       editMode: false,
          newMedicine: {  // this resets forms after its edited by user
             medicine: '',
-            level: '',
+            level: '1ml',
+            date: ''
             }
-        }));
+        });
 
       } catch (error) {
 
@@ -77,11 +88,12 @@ export default function App() {
         medicines: [...state.medicines, medicine],
         newMedicine: {
            medicine: "", 
-            level: "3"
+            level: "1ml",
+            date: ''
        }
       });
     } catch(error) {
-      console.log(error);          
+           
      }
    }
 }
@@ -110,17 +122,40 @@ export default function App() {
 
   }
 
+  async function handleDelete(id) {
+    try {
+     const medicines = await fetch(`http://localhost:3001/api/medicines/${id}`, {
+       method: 'DELETE' //send delete request using ajax, no headers or reqbod
+     }).then(res => res.json());
+     setState(prevState => ({
+       ...prevState,
+       medicines
+
+     }));
+    } catch (error){
+
+    }
+  }
+
+
+
   return (
+    <>
+    <Header />
     <section>
-      <h2>Kids Medicine Tracker</h2>
-      <hr />
+      
       {state.medicines.map((s, i) => (
         <article key={i}>
           <div>{s.medicine}</div> 
           <div>{s.level}</div>
+          <div>{s.date}</div>
           <div 
           className="controls"
-          onClick={() => handleEdit(s._id)}>{'✏️'}</div>
+          onClick={() => handleEdit(s._id)}>Edit</div>
+
+        <div 
+         className="controls"
+         onClick={() => handleDelete(s._id)}>Delete</div>
           
         </article>
       ))}
@@ -133,15 +168,19 @@ export default function App() {
         <label>
           <span>Quantity:</span>
           <select name="level" value={state.newMedicine.level} onChange={handleChange}>
-            <option value="1">1ml</option>
-            <option value="2">2ml</option>
-            <option value="3">3ml</option>
-            <option value="4">4ml</option>
-            <option value="5">5ml</option>
+            <option value="1ml">1ml</option>
+            <option value="2ml">2ml</option>
+            <option value="3ml">3ml</option>
+            <option value="4ml">4ml</option>
+            <option value="5ml">5ml</option>
           </select>
         </label>
-        <button>{state.editMode ? 'EDIT Medicine' : 'ADD MEDICINE'}</button>
+
+        
+        
+        <button>{state.editMode ? 'Edit Medicine' : 'Add Medicine'}</button>
       </form>
     </section>
+    </>
   );
 }
