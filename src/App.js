@@ -1,7 +1,9 @@
 
 import { useState, useEffect } from "react";
+import { auth } from './services/firebase';
 import "./App.css";
 import Header from './components/Header/Header';
+
 
 //import 'react-datepicker/dist/react-datepicker.css'
 //import MyComponent from "./MyComponent";
@@ -23,6 +25,12 @@ export default function App() {
     editMode: false
   });
 
+  const [ userState, setUserState ] = useState({
+   user: null
+  });
+
+
+
   useEffect(function() {
     async function getAppData () {
 
@@ -37,6 +45,8 @@ export default function App() {
     }
 
    getAppData();
+
+   auth.onAuthStateChanged(user => setUserState({ user })); 
 
   }, []);
 
@@ -141,7 +151,7 @@ export default function App() {
 
   return (
     <>
-    <Header />
+    <Header user={userState.user} />
     <section>
       
       {state.medicines.map((s, i) => (
