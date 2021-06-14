@@ -46,8 +46,12 @@ export default function App() {
 
    getAppData();
 
-   auth.onAuthStateChanged(user => setUserState({ user })); 
+   const unsubscribe = auth.onAuthStateChanged(user => setUserState({ user })); 
 
+
+  return function() {
+    unsubscribe();
+    }
   }, []);
 
   async function handleSumbit(e) {
