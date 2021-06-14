@@ -5,6 +5,7 @@ import "./App.css";
 import Header from './components/Header/Header';
 
 
+
 //import 'react-datepicker/dist/react-datepicker.css'
 //import MyComponent from "./MyComponent";
 
@@ -189,7 +190,10 @@ export default function App() {
             <option value="5ml">5ml</option>
           </select>
         </label>
-
+        <label for="medicine-time">
+     <span>Date</span>
+     </label>
+      <input name="date" type="datetime-local" value={state.newMedicine.date} onChange={handleChange}/>
         
         
         <button>{state.editMode ? 'Edit Medicine' : 'Add Medicine'}</button>
