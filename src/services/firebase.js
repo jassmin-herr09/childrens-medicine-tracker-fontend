@@ -1,6 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+const BASE_URL = 'https://https://kids-medicine-tracker-backend.herokuapp.com/api/medicines';
+
+
 const config = {
     apiKey: "AIzaSyCZ-wBfR81dmKoNhphIjjl1HMOZlYJVNUk",
     authDomain: "react-kids-medicine-tracker.firebaseapp.com",
