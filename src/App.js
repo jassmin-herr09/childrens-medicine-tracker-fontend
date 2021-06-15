@@ -140,7 +140,7 @@ export default function App() {
 
   async function handleDelete(id) {
     try {
-     const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines', {
+     const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines/' + id, {
        method: 'DELETE' //send delete request using ajax, no headers or reqbod
      }).then(res => res.json());
      setState(prevState => ({
