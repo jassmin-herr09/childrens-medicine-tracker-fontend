@@ -200,7 +200,7 @@ export default function App() {
           <span>Time</span>
         </label>
           <input id="medicine-time" name="time" type="time" value={state.newMedicine.time} onChange={handleChange} />
-
+         
         <button>{state.editMode ? 'Edit Medicine' : 'Add Medicine'}</button>
       </form>
     </section>
