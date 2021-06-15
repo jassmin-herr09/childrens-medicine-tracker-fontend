@@ -19,7 +19,8 @@ export default function App() {
       newMedicine: {  
         medicine: "",
         level: "1ml",
-        date: ''
+        date: '',
+        time: ''
     },
  
 
@@ -164,6 +165,7 @@ export default function App() {
           <div>{s.medicine}</div> 
           <div>{s.level}</div>
           <div>{s.date}</div>
+          <div>{s.time}</div>
           <div 
           className="controls"
           onClick={() => handleEdit(s._id)}>Edit</div>
@@ -176,10 +178,10 @@ export default function App() {
       ))}
       <hr />
       <form onSubmit={handleSumbit}>
-        <label>
+        <label for="medicine-name">
           <span>Name</span>
         </label>
-          <input name="medicine" value={state.newMedicine.medicine} onChange={handleChange}/>
+          <input name="medicine" id="medicine-name"value={state.newMedicine.medicine} onChange={handleChange}/>
         <label>
           <span>Quantity:</span>
           <select name="level" value={state.newMedicine.level} onChange={handleChange}>
@@ -190,12 +192,15 @@ export default function App() {
             <option value="5ml">5ml</option>
           </select>
         </label>
-        <label for="medicine-time">
+      <label for="medicine-date">
      <span>Date</span>
      </label>
-      <input name="date" type="datetime-local" value={state.newMedicine.date} onChange={handleChange}/>
-        
-        
+      <input id="medicine-date" name="date" type="date" value={state.newMedicine.date} onChange={handleChange}/>
+        <label for="medicine-time">
+          <span>Time</span>
+        </label>
+          <input id="medicine-time" name="time" type="time" value={state.newMedicine.time} onChange={handleChange} />
+
         <button>{state.editMode ? 'Edit Medicine' : 'Add Medicine'}</button>
       </form>
     </section>
