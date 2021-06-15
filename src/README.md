@@ -13,7 +13,7 @@ A React App that tracks children's liquid medicine. App allows to add, edit, del
 
 ## Screenshots
 
-![screenshot](#)
+![screenshot](./public/images/image.png)
 
 
 ## Getting Started
