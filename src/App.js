@@ -36,7 +36,7 @@ export default function App() {
   useEffect(function() {
     async function getAppData () {
 
-      const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/')
+      const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines')
       .then(res => res.json());
 
       setState(prevState =>({
@@ -63,7 +63,7 @@ export default function App() {
       try {
         const { medicine, level, _id } = state.newMedicine;
 
-        const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/', {
+        const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines', {
           method: 'PUT',
           headers: {
             'Content-type': 'Application/json'
@@ -90,7 +90,7 @@ export default function App() {
     } else {
      //this creates a new medicine
       try {
-        const medicine = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/', {
+        const medicine = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines', {
          method: 'POST',
          headers: {
          'Content-type': 'Application/json'
@@ -140,7 +140,7 @@ export default function App() {
 
   async function handleDelete(id) {
     try {
-     const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/', {
+     const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines', {
        method: 'DELETE' //send delete request using ajax, no headers or reqbod
      }).then(res => res.json());
      setState(prevState => ({
