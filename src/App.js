@@ -4,12 +4,7 @@ import { auth } from './services/firebase';
 import "./App.css";
 import Header from './components/Header/Header';
 
-
-
-//import 'react-datepicker/dist/react-datepicker.css'
-//import MyComponent from "./MyComponent";
-
-//import moment from 'moment'
+import moment from 'moment'
 
 
 
@@ -61,15 +56,15 @@ export default function App() {
 
     if(state.editMode) {
       try {
-        const { medicine, level, _id } = state.newMedicine;
+        const { medicine, level, date, time, _id } = state.newMedicine;
 
-        const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines', {
+        const medicines = await fetch('https://kids-medicine-tracker-backend.herokuapp.com/api/medicines/' + _id , {
           method: 'PUT',
           headers: {
             'Content-type': 'Application/json'
 
           },
-         body: JSON.stringify({ medicine, level })
+         body: JSON.stringify({ medicine, level, date, time })
 
         }).then(res => res.json());
 
@@ -116,6 +111,7 @@ export default function App() {
     
 
   function handleChange(e) {
+    console.log(e.target.value,typeof e.target.value)
     setState(prevState => ({
          ...prevState,
           newMedicine: {
@@ -164,7 +160,7 @@ export default function App() {
         <article key={i}>
           <div>{s.medicine}</div> 
           <div>{s.level}</div>
-          <div>{s.date}</div>
+          <div>{moment(s.date).format('MM-DD-YYYY')}</div>
           <div>{s.time}</div>
           <div 
           className="controls"
